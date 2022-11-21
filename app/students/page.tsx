@@ -3,7 +3,6 @@ async function getStudents () {
     const data = await res.json()
 
     return data?.items as any[]
-
 }
 export default async function StudentsPage() {
     const students = await getStudents()
