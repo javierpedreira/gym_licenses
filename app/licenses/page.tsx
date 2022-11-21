@@ -6,17 +6,10 @@ async function getStudent(id: string) {
 }
 
 async function getLicenses () {
-  const res = await fetch('http://127.0.0.1:8090/api/collections/licenses/records?page=1&perPage30')
+  const res = await fetch('http://127.0.0.1:8090/api/collections/licenses/records?page=1&perPage30&expand=owner')
   const data = await res.json()
 
   const rawLicenses = data?.items as any[] 
-
-  // TODO: Add the owner email or username and fix async call by resolving the Promise
-  // const licesesWithStudents = rawLicenses?.map(async (license) => {
-  //   const res = await getStudent(license.owner)
-
-  //   return Object.assign(license, {owner: res.email})
-  // })
 
   return rawLicenses
 }
@@ -28,7 +21,7 @@ export default async function LicensesPage() {
       <h1>Licenses</h1>
       <div>
         {licenses?.map((lic) => {
-            return <License key={lic.id} owner={lic.owner} expiration={lic.expiration}/>
+          return <License key={lic.id} owner={lic.expand.owner.name} expiration={lic.expiration}/>
         })}
       </div>
     </div>
