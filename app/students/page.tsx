@@ -4,6 +4,7 @@ async function getStudents () {
 
     return data?.items as any[]
 }
+
 export default async function StudentsPage() {
     const students = await getStudents()
 
