@@ -1,5 +1,10 @@
 import CreateLicense from "./CreateLicense"
 
+export interface Student {
+  id: string
+  name: string
+}
+
 async function getStudents () {
   const res = await fetch('http://127.0.0.1:8090/api/collections/students/records?page=1&perPage30')
   const data = await res.json()
@@ -17,7 +22,10 @@ async function getLicenses () {
 
 export default async function LicensesPage() {
   const licenses = await getLicenses()
-  const students = (await getStudents()).map((student) => student.id) as string[]
+  const students = (await getStudents()).map((student) => {
+
+    return {id: student.id as string, name: student.name as string}
+  })
 
   return (
     <div>

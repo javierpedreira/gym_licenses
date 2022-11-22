@@ -1,11 +1,12 @@
 'use client'
 
 import { ChangeEvent, useState } from "react"
+import { Student } from "./page"
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
 interface CreateLicenseProps {
-  owners: string[]
+  owners: Student[]
 }
 
 export default function CreateLicense({owners}: CreateLicenseProps) {
@@ -54,7 +55,7 @@ export default function CreateLicense({owners}: CreateLicenseProps) {
 
 
 interface StudentsSelectorProps {
-  students: string[]
+  students: Student[]
   selectStudent: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
@@ -65,7 +66,7 @@ function StudentsSelector({students, selectStudent}: StudentsSelectorProps) {
       <select name="students" id="student-select" onChange={selectStudent}>
           <option value="">--Please choose an option--</option>
             {students?.map((student) => {
-              return <option key={student} value={student}>{student}</option>
+              return <option key={student.id} value={student.id}>{student.name}</option>
             })}
       </select>
     </>
