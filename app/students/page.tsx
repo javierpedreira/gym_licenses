@@ -1,3 +1,5 @@
+import CreateStudent from "./CreateStudent"
+
 async function getStudents () {
     const res = await fetch('http://127.0.0.1:8090/api/collections/students/records?page=1&perPage30')
     const data = await res.json()
@@ -16,6 +18,7 @@ export default async function StudentsPage() {
                     return <Student key={student.id} name={student.name} email={student.email} birthday={student.birthday}/>
                 })}
             </div>
+            <CreateStudent />
         </div>
     )
 }
