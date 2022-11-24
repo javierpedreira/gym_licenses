@@ -5,6 +5,7 @@ interface StudentProps {
     name: string
     email: string
     birthday: string
+    updateStudents: () => void
 }
 
 async function deleteStudent (id: string) {
@@ -18,12 +19,18 @@ async function deleteStudent (id: string) {
   return res
 }
 
-export default function Student({name, email, birthday, id}: StudentProps) {
+export default function Student({name, email, birthday, id, updateStudents}: StudentProps) {
   
   const callDelete = () => {
     deleteStudent(id)
-
+    .then (() => {
+      updateStudents()
+      })
+    .catch((error) => {
+      console.log(`Something went wrong, ${error}`)
+    })
   }
+  
   
   return (
         <>
