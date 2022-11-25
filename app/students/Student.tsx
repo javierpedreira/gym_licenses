@@ -1,10 +1,13 @@
 'use client'
 
-interface StudentProps {
-    id: string
-    name: string
-    email: string
-    birthday: string
+export interface Student {
+  id: string
+  name: string
+  email: string
+  birthday: string
+}
+
+interface StudentProps extends Student {
     updateStudents: () => void
 }
 
@@ -19,7 +22,7 @@ async function deleteStudent (id: string) {
   return res
 }
 
-export default function Student({name, email, birthday, id, updateStudents}: StudentProps) {
+export default function StudentCompoent({name, email, birthday, id, updateStudents}: StudentProps) {
   
   const callDelete = () => {
     deleteStudent(id)
@@ -30,7 +33,6 @@ export default function Student({name, email, birthday, id, updateStudents}: Stu
       console.log(`Something went wrong, ${error}`)
     })
   }
-  
   
   return (
         <>
