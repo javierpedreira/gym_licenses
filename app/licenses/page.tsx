@@ -6,6 +6,7 @@ async function getStudents() {
 
   return data?.items as any[]
 }
+
 async function getLicenses() {
   const res = await fetch('http://127.0.0.1:8090/api/collections/licenses/records?page=1&perPage30&expand=owner')
   const data = await res.json()
