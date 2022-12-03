@@ -33,7 +33,10 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 ## Starting local database with pocketbase
 
 Run `./pocketbase serve
+
+## Configuring supabase
+
+Create a new file called `.env.local` using `.env.template`'s content. Populate the file using the `API URL` and `anon` from https://app.supabase.com/
