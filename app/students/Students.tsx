@@ -1,6 +1,7 @@
 'use client'
 
 import {useEffect, useState} from 'react'
+import {StudentsService} from '../utils/StudentsService'
 import CreateStudent from './CreateStudent'
 import StudentCompoent, {Student} from './Student'
 
@@ -8,26 +9,19 @@ interface StudentsProps {
   students: Student[]
 }
 
-async function getStudents() {
-  const res = await fetch('http://127.0.0.1:8090/api/collections/students/records?page=1&perPage30')
-  const data = await res.json()
-
-  return data?.items
-}
-
 export default function Students({students}: StudentsProps) {
   const [sts, setStudents] = useState<Student[]>(students)
 
   useEffect(() => {
     ;(async () => {
-      const students = await getStudents()
+      const students = await StudentsService.fetchAllStudents()
 
       setStudents(students)
     })()
   }, [])
 
   const updateStudents = async () => {
-    const students = await getStudents()
+    const students = await StudentsService.fetchAllStudents()
 
     setStudents(students)
   }
