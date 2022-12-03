@@ -1,6 +1,7 @@
 'use client'
 
 import {useState} from 'react'
+import {StudentsService} from '../utils/StudentsService'
 
 export interface Student {
   id: string
@@ -13,17 +14,6 @@ interface StudentProps extends Student {
   updateStudents: () => void
 }
 
-async function deleteStudent(id: string) {
-  const res = await fetch(`http://127.0.0.1:8090/api/collections/students/records/${id}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-
-  return res
-}
-
 const body = (name: string, email: string, birthday: string) => {
   return JSON.stringify({
     name,
@@ -32,25 +22,13 @@ const body = (name: string, email: string, birthday: string) => {
   })
 }
 
-async function editStudent(id: string, name: string, email: string, birthday: string) {
-  const res = await fetch(`http://127.0.0.1:8090/api/collections/students/records/${id}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: body(name, email, birthday)
-  })
-
-  return res
-}
-
 export default function StudentCompoent({name, email, birthday, id, updateStudents}: StudentProps) {
   const [newBirthday, setBirthday] = useState(birthday)
   const [newName, setName] = useState(name)
   const [newEmail, setEmail] = useState(email)
 
   const callDelete = () => {
-    deleteStudent(id)
+    StudentsService.deleteStudent(id)
       .then(() => {
         updateStudents()
       })
@@ -60,7 +38,7 @@ export default function StudentCompoent({name, email, birthday, id, updateStuden
   }
 
   const callUpdate = () => {
-    editStudent(id, newName, newEmail, newBirthday)
+    StudentsService.editStudent(id, newName, newEmail, newBirthday)
       .then(() => {
         updateStudents()
       })

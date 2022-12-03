@@ -13,6 +13,12 @@ class StudentsDBConnector {
 
     return !!data ? data : []
   }
+
+  async deleteStudent(id: string) {
+    await this.client.from('students').delete().filter('id', 'eq', id)
+  }
+
+  async editStudent(id: string, name: string, email: string, birthday: string) {}
 }
 
 export const StudentsService = new StudentsDBConnector(SupaBaseConnector.client())
