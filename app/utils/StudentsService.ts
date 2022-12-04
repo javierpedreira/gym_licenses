@@ -9,13 +9,13 @@ class StudentsDBConnector {
   }
 
   async fetchAllStudents() {
-    const {error, data, status} = await this.client.from('students').select('*')
+    const {data} = await this.client.from('students').select('*')
 
     return !!data ? data : []
   }
 
   async createStudent(name: string, email: string, birthday: string) {
-    await this.client.from('students').insert({email, name, birthday})
+    await this.client.from('students').insert({name, email, birthday})
   }
 
   async deleteStudent(id: string) {

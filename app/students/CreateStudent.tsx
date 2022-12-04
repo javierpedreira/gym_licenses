@@ -11,7 +11,7 @@ export default function CreateLicense() {
   const [email, setEmail] = useState('')
 
   const create = async () => {
-    StudentsService.createStudent(email, name, birthday)
+    StudentsService.createStudent(name, email, birthday)
     setBirthday(TODAY)
     setName('')
     setEmail('')
@@ -21,7 +21,7 @@ export default function CreateLicense() {
     <form onSubmit={create}>
       <h1>Add a new student</h1>
       <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-      <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
       <input type="date" placeholder="Birthday" value={birthday} onChange={(e) => setBirthday(e.target.value)} />
       <button type="submit">Create</button>
     </form>
