@@ -1,3 +1,4 @@
+import AuthLayer from '../components/AuthLayer'
 import {LicensesService} from '../dbOps/LicensesService'
 
 export interface LicenseProps {
