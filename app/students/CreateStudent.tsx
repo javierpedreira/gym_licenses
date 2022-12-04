@@ -11,7 +11,7 @@ export default function CreateLicense() {
   const [email, setEmail] = useState('')
 
   const create = async () => {
-    StudentsService.create(name, email, birthday)
+    StudentsService.create({name, email, birthday})
     setBirthday(TODAY)
     setName('')
     setEmail('')

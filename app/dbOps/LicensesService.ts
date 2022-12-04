@@ -1,32 +1,18 @@
-import {StudentId} from '../licenses/CreateLicense'
-import {SupabaseClient} from '@supabase/supabase-js'
 import {SupaBaseConnector} from './SupabaseConnector'
+import {DBOps} from './DBOps'
 
-class LicensesDBConnector {
-  private client: SupabaseClient
-
-  constructor(dbConnector: SupabaseClient) {
-    this.client = dbConnector
-  }
-
-  async fetchAll() {
-    const {data} = await this.client.from('licenses').select('*')
-
-    return !!data ? data : []
-  }
-
-  async create(identifier: number, expedition: string, owner: string) {
-    console.log({identifier, expedition, owner})
-    await this.client.from('licenses').insert({identifier, expedition, owner})
-  }
-
-  async delete(id: string) {
-    await this.client.from('licenses').delete().filter('id', 'eq', id)
-  }
-
-  async edit(id: string, identifier: number, expedition: string, owner: string) {
-    await this.client.from('licenses').update({identifier, expedition, owner}).eq('id', id)
-  }
+export interface LicenseQueryResponse {
+  id: string
+  identifier: number
+  owner: string
+  expedition: string
 }
 
-export const LicensesService = new LicensesDBConnector(SupaBaseConnector.client())
+interface License {
+  identifier: number
+  expedition: string
+  owner: string
+}
+class LicenseDBConnector extends DBOps<LicenseQueryResponse, License> {}
+
+export const LicensesService = new LicenseDBConnector(SupaBaseConnector.client(), 'licenses')

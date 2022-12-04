@@ -3,14 +3,11 @@
 import {useState} from 'react'
 import {StudentsService} from '../dbOps/StudentsService'
 
-export interface Student {
-  id: string
+interface StudentProps {
+  id: number
   name: string
   email: string
   birthday: string
-}
-
-interface StudentProps extends Student {
   updateStudents: () => void
 }
 
@@ -30,7 +27,7 @@ export default function StudentCompoent({name, email, birthday, id, updateStuden
   }
 
   const callUpdate = () => {
-    StudentsService.edit(id, newName, newEmail, newBirthday)
+    StudentsService.edit(id, {name: newName, email: newEmail, birthday: newBirthday})
       .then(() => {
         updateStudents()
       })

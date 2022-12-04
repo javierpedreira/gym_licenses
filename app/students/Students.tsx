@@ -2,16 +2,16 @@
 
 import {useEffect, useState} from 'react'
 import AuthLayer from '../components/AuthLayer'
-import {StudentsService} from '../dbOps/StudentsService'
+import {StudentQueryResponse, StudentsService} from '../dbOps/StudentsService'
 import CreateStudent from './CreateStudent'
-import StudentCompoent, {Student} from './Student'
+import StudentCompoent from './Student'
 
 interface StudentsProps {
-  students: Student[]
+  students: StudentQueryResponse[]
 }
 
 export default function Students({students}: StudentsProps) {
-  const [sts, setStudents] = useState<Student[]>(students)
+  const [sts, setStudents] = useState<StudentQueryResponse[]>(students)
 
   useEffect(() => {
     ;(async () => {

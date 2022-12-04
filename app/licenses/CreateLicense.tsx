@@ -42,17 +42,9 @@ export default function CreateLicense({owners}: CreateLicenseProps) {
   const [identifier, setIdentifier] = useState(0)
   const [owner, setOwner] = useState<StudentId | undefined>(undefined)
 
-  const setBody = () => {
-    return JSON.stringify({
-      expedition,
-      identifier,
-      owner
-    })
-  }
-
   const create = async () => {
     if (!!owner) {
-      LicensesService.create(identifier, expedition, owner.id)
+      LicensesService.create({identifier, expedition, owner: owner.id})
     }
 
     setExpeditionDate(TODAY)

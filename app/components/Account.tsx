@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useUser, useSupabaseClient, Session} from '@supabase/auth-helpers-react'
 import {Database} from '../dbOps/database.types'
+import {ProfilesService} from '../dbOps/ProfilesService'
 
 type Profiles = Database['public']['Tables']['profiles']['Row']
 
@@ -21,11 +22,7 @@ export default function Account({session}: {session: Session}) {
       setLoading(true)
       if (!user) throw new Error('No user')
 
-      let {data, error, status} = await supabase
-        .from('profiles')
-        .select(`username, website, avatar_url`)
-        .eq('id', user.id)
-        .single()
+      const {data, error, status} = await ProfilesService.find(user.id)
 
       if (error && status !== 406) {
         throw error
@@ -57,15 +54,12 @@ export default function Account({session}: {session: Session}) {
       setLoading(true)
       if (!user) throw new Error('No user')
 
-      const updates = {
-        id: user.id,
+      const error = await ProfilesService.edit(user.id, {
         username,
         website,
-        avatar_url,
-        updated_at: new Date().toISOString()
-      }
+        avatar_url
+      })
 
-      let {error} = await supabase.from('profiles').upsert(updates)
       if (error) throw error
       alert('Profile updated!')
     } catch (error) {

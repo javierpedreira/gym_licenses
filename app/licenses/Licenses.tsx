@@ -1,21 +1,18 @@
 'use client'
 
 import {useEffect, useState} from 'react'
-import {LicensesService} from '../dbOps/LicensesService'
+import {LicenseQueryResponse, LicensesService} from '../dbOps/LicensesService'
 import CreateLicense, {StudentId} from './CreateLicense'
 import LicenseComponent from './License'
-import {Auth, ThemeSupa} from '@supabase/auth-ui-react'
-import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
-import {License} from './page'
 import AuthLayer from '../components/AuthLayer'
 
 interface LicensesProps {
-  licenses: License[]
+  licenses: LicenseQueryResponse[]
   students: StudentId[]
 }
 
 export default function Licenses({licenses, students}: LicensesProps) {
-  const [lcs, setLicenses] = useState<License[]>(licenses)
+  const [lcs, setLicenses] = useState<LicenseQueryResponse[]>(licenses)
 
   useEffect(() => {
     ;(async () => {
@@ -29,8 +26,6 @@ export default function Licenses({licenses, students}: LicensesProps) {
     setLicenses(newLicenses)
   }
 
-  const session = useSession()
-  const supabase = useSupabaseClient()
   return (
     <AuthLayer>
       <div>
@@ -42,6 +37,7 @@ export default function Licenses({licenses, students}: LicensesProps) {
                 updateLicenses={updateLicenses}
                 key={lic.id}
                 id={lic.id}
+                //TODO: This should be the name, not the ID 👇
                 owner={lic.owner}
                 identifier={lic.identifier}
                 expedition={lic.expedition}
