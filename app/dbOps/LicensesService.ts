@@ -1,4 +1,4 @@
-import {StudentId} from './../licenses/CreateLicense'
+import {StudentId} from '../licenses/CreateLicense'
 import {SupabaseClient} from '@supabase/supabase-js'
 import {SupaBaseConnector} from './SupabaseConnector'
 

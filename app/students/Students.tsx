@@ -1,7 +1,7 @@
 'use client'
 
 import {useEffect, useState} from 'react'
-import {StudentsService} from '../utils/StudentsService'
+import {StudentsService} from '../dbOps/StudentsService'
 import CreateStudent from './CreateStudent'
 import StudentCompoent, {Student} from './Student'
 
@@ -19,7 +19,7 @@ export default function Students({students}: StudentsProps) {
   }, [])
 
   const updateStudents = async () => {
-    const students = await StudentsService.fetchAllStudents()
+    const students = await StudentsService.fetchAll()
 
     setStudents(students)
   }

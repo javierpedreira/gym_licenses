@@ -1,7 +1,7 @@
 'use client'
 
 import {ChangeEvent, useState} from 'react'
-import {LicensesService} from '../utils/LicensesService'
+import {LicensesService} from '../dbOps/LicensesService'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 

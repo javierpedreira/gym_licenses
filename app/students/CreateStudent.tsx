@@ -1,7 +1,7 @@
 'use client'
 
 import {useState} from 'react'
-import {StudentsService} from '../utils/StudentsService'
+import {StudentsService} from '../dbOps/StudentsService'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
@@ -11,7 +11,7 @@ export default function CreateLicense() {
   const [email, setEmail] = useState('')
 
   const create = async () => {
-    StudentsService.createStudent(name, email, birthday)
+    StudentsService.create(name, email, birthday)
     setBirthday(TODAY)
     setName('')
     setEmail('')

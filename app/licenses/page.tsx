@@ -1,5 +1,5 @@
-import {LicensesService} from '../utils/LicensesService'
-import {StudentsService} from '../utils/StudentsService'
+import {LicensesService} from '../dbOps/LicensesService'
+import {StudentsService} from '../dbOps/StudentsService'
 import Licenses from './Licenses'
 
 export interface License {
@@ -12,7 +12,7 @@ export interface License {
 export default async function LicensesPage() {
   const licenses = await LicensesService.fetchAll()
 
-  const students = await StudentsService.fetchAllStudents()
+  const students = await StudentsService.fetchAll()
 
   return <Licenses licenses={licenses} students={students} />
 }

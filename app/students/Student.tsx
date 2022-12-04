@@ -1,7 +1,7 @@
 'use client'
 
 import {useState} from 'react'
-import {StudentsService} from '../utils/StudentsService'
+import {StudentsService} from '../dbOps/StudentsService'
 
 export interface Student {
   id: string
@@ -20,7 +20,7 @@ export default function StudentCompoent({name, email, birthday, id, updateStuden
   const [newEmail, setEmail] = useState(email)
 
   const callDelete = () => {
-    StudentsService.deleteStudent(id)
+    StudentsService.delete(id)
       .then(() => {
         updateStudents()
       })
@@ -30,7 +30,7 @@ export default function StudentCompoent({name, email, birthday, id, updateStuden
   }
 
   const callUpdate = () => {
-    StudentsService.editStudent(id, newName, newEmail, newBirthday)
+    StudentsService.edit(id, newName, newEmail, newBirthday)
       .then(() => {
         updateStudents()
       })

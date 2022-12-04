@@ -1,4 +1,4 @@
-import {LicensesService} from '../utils/LicensesService'
+import {LicensesService} from '../dbOps/LicensesService'
 
 export interface LicenseProps {
   id: string

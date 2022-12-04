@@ -1,7 +1,7 @@
 'use client'
 
 import {useEffect, useState} from 'react'
-import {LicensesService} from '../utils/LicensesService'
+import {LicensesService} from '../dbOps/LicensesService'
 import CreateLicense, {StudentId} from './CreateLicense'
 import LicenseComponent from './License'
 import {License} from './page'
