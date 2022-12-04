@@ -1,6 +1,7 @@
 'use client'
 
 import {useState} from 'react'
+import {StudentsService} from '../utils/StudentsService'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
@@ -9,23 +10,8 @@ export default function CreateLicense() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const setBody = () => {
-    return JSON.stringify({
-      email,
-      name,
-      birthday
-    })
-  }
-
   const create = async () => {
-    const w = await fetch('http://127.0.0.1:8090/api/collections/students/records', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: setBody()
-    })
-
+    StudentsService.createStudent(email, name, birthday)
     setBirthday(TODAY)
     setName('')
     setEmail('')

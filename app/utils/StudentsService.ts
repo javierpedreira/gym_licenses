@@ -14,6 +14,10 @@ class StudentsDBConnector {
     return !!data ? data : []
   }
 
+  async createStudent(name: string, email: string, birthday: string) {
+    await this.client.from('students').insert({email, name, birthday})
+  }
+
   async deleteStudent(id: string) {
     await this.client.from('students').delete().filter('id', 'eq', id)
   }
