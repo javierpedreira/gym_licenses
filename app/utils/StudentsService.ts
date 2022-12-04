@@ -18,7 +18,9 @@ class StudentsDBConnector {
     await this.client.from('students').delete().filter('id', 'eq', id)
   }
 
-  async editStudent(id: string, name: string, email: string, birthday: string) {}
+  async editStudent(id: string, name: string, email: string, birthday: string) {
+    await this.client.from('students').update({name, email, birthday}).eq('id', id)
+  }
 }
 
 export const StudentsService = new StudentsDBConnector(SupaBaseConnector.client())

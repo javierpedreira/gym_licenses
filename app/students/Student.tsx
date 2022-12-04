@@ -14,14 +14,6 @@ interface StudentProps extends Student {
   updateStudents: () => void
 }
 
-const body = (name: string, email: string, birthday: string) => {
-  return JSON.stringify({
-    name,
-    email,
-    birthday
-  })
-}
-
 export default function StudentCompoent({name, email, birthday, id, updateStudents}: StudentProps) {
   const [newBirthday, setBirthday] = useState(birthday)
   const [newName, setName] = useState(name)
