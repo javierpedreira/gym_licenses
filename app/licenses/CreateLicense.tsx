@@ -40,7 +40,7 @@ function StudentsSelector({students, selectStudent}: StudentsSelectorProps) {
 export default function CreateLicense({owners}: CreateLicenseProps) {
   const [expedition, setExpeditionDate] = useState(TODAY)
   const [identifier, setIdentifier] = useState(0)
-  const [owner, setOwner] = useState<StudentId>(owners[0])
+  const [owner, setOwner] = useState<StudentId | undefined>(undefined)
 
   const setBody = () => {
     return JSON.stringify({
@@ -51,14 +51,18 @@ export default function CreateLicense({owners}: CreateLicenseProps) {
   }
 
   const create = async () => {
-    LicensesService.create(identifier, expedition, owner)
+    if (!!owner) {
+      LicensesService.create(identifier, expedition, owner.id)
+    }
 
     setExpeditionDate(TODAY)
     setIdentifier(0)
-    setOwner(owners[0])
+    setOwner(undefined)
   }
 
-  const addSelectedStudentToState = (event: ChangeEvent<HTMLSelectElement>) => setOwner(event.target.value)
+  const addSelectedStudentToState = (event: ChangeEvent<HTMLSelectElement>) => {
+    setOwner(owners.find((s) => s.id == event.target.value))
+  }
 
   return (
     <form onSubmit={create}>
@@ -76,7 +80,9 @@ export default function CreateLicense({owners}: CreateLicenseProps) {
         onChange={(e) => setExpeditionDate(e.target.value)}
       />
       <StudentsSelector students={owners} selectStudent={addSelectedStudentToState} />
-      <button type="submit">Add a new license</button>
+      <button type="submit" disabled={!owner}>
+        Add a new license
+      </button>
     </form>
   )
 }

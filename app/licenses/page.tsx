@@ -12,7 +12,11 @@ export interface License {
 export default async function LicensesPage() {
   const licenses = await LicensesService.fetchAll()
 
-  const students = await StudentsService.fetchAll()
+  const students = await (
+    await StudentsService.fetchAll()
+  ).map((student) => {
+    return {id: student.id, name: student.name}
+  })
 
   return <Licenses licenses={licenses} students={students} />
 }

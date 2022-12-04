@@ -15,7 +15,8 @@ class LicensesDBConnector {
     return !!data ? data : []
   }
 
-  async create(identifier: number, expedition: string, owner: StudentId) {
+  async create(identifier: number, expedition: string, owner: string) {
+    console.log({identifier, expedition, owner})
     await this.client.from('licenses').insert({identifier, expedition, owner})
   }
 
@@ -23,7 +24,7 @@ class LicensesDBConnector {
     await this.client.from('licenses').delete().filter('id', 'eq', id)
   }
 
-  async edit(id: string, identifier: number, expedition: string, owner: StudentId) {
+  async edit(id: string, identifier: number, expedition: string, owner: string) {
     await this.client.from('licenses').update({identifier, expedition, owner}).eq('id', id)
   }
 }
