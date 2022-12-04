@@ -1,20 +1,6 @@
+import {LicensesService} from '../utils/LicensesService'
+import {StudentsService} from '../utils/StudentsService'
 import Licenses from './Licenses'
-
-async function getStudents() {
-  const res = await fetch('http://127.0.0.1:8090/api/collections/students/records?page=1&perPage30')
-  const data = await res.json()
-
-  return data?.items as any[]
-}
-
-async function getLicenses() {
-  const res = await fetch('http://127.0.0.1:8090/api/collections/licenses/records?page=1&perPage30&expand=owner')
-  const data = await res.json()
-
-  const rawLicenses = data?.items as any[]
-
-  return rawLicenses
-}
 
 export interface License {
   id: string
@@ -24,11 +10,9 @@ export interface License {
 }
 
 export default async function LicensesPage() {
-  const licenses = (await getLicenses()).map((lic) => {
-    return {id: lic.id, identifier: lic.identifier, owner: lic.expand.owner.name, expedition: lic.expedition}
-  })
+  const licenses = await LicensesService.fetchAll()
 
-  const students = await getStudents()
+  const students = await StudentsService.fetchAllStudents()
 
   return <Licenses licenses={licenses} students={students} />
 }
