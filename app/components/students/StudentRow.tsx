@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 interface StudentProps {
   id: number
   name: string
@@ -8,7 +10,7 @@ interface StudentProps {
 export default function StudentRow({name, email, birthday, id}: StudentProps) {
   return (
     <li>
-      {name}, {email}, {birthday}
+      <Link href={`/student/${id}`}>{name}</Link>,{email}, {birthday}
     </li>
   )
 }

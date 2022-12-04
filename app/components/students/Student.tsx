@@ -1,7 +1,7 @@
 'use client'
 
 import {useState} from 'react'
-import {StudentsService} from '../dbOps/StudentsService'
+import {StudentsService} from '../../dbOps/StudentsService'
 
 interface StudentProps {
   id: number
