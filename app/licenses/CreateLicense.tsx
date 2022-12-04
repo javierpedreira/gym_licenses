@@ -1,6 +1,7 @@
 'use client'
 
 import {ChangeEvent, useState} from 'react'
+import {LicensesService} from '../utils/LicensesService'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
@@ -50,13 +51,7 @@ export default function CreateLicense({owners}: CreateLicenseProps) {
   }
 
   const create = async () => {
-    const w = await fetch('http://127.0.0.1:8090/api/collections/licenses/records', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: setBody()
-    })
+    LicensesService.create(identifier, expedition, owner)
 
     setExpeditionDate(TODAY)
     setIdentifier(0)

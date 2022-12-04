@@ -14,9 +14,7 @@ export default function Students({students}: StudentsProps) {
 
   useEffect(() => {
     ;(async () => {
-      const students = await StudentsService.fetchAllStudents()
-
-      setStudents(students)
+      updateStudents()
     })()
   }, [])
 

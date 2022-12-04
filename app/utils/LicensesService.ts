@@ -1,3 +1,4 @@
+import {StudentId} from './../licenses/CreateLicense'
 import {SupabaseClient} from '@supabase/supabase-js'
 import {SupaBaseConnector} from './SupabaseConnector'
 
@@ -11,12 +12,10 @@ class LicensesDBConnector {
   async fetchAll() {
     const {data} = await this.client.from('licenses').select('*')
 
-    console.log(data)
-
     return !!data ? data : []
   }
 
-  async create(identifier: string, expedition: string, owner: string) {
+  async create(identifier: number, expedition: string, owner: StudentId) {
     await this.client.from('licenses').insert({identifier, expedition, owner})
   }
 
@@ -24,7 +23,7 @@ class LicensesDBConnector {
     await this.client.from('licenses').delete().filter('id', 'eq', id)
   }
 
-  async edit(id: string, identifier: string, expedition: string, owner: string) {
+  async edit(id: string, identifier: number, expedition: string, owner: StudentId) {
     await this.client.from('licenses').update({identifier, expedition, owner}).eq('id', id)
   }
 }
