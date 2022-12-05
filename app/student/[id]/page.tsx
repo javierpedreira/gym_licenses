@@ -1,4 +1,4 @@
-import StudentCompoent from '../../components/students/Student'
+import StudentDetail from '../../components/students/StudentDetail'
 import {StudentsService} from '../../dbOps/StudentsService'
 
 interface StudentDetailProps {
@@ -15,7 +15,7 @@ export default async function Page({params}: StudentDetailProps) {
 
   return (
     <>
-      <StudentCompoent id={params.id} name={data.name} email={data.email} birthday={data.birthday} />
+      <StudentDetail id={params.id} name={data.name} email={data.email} birthday={data.birthday} />
     </>
   )
 }

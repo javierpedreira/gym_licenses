@@ -10,7 +10,7 @@ interface StudentProps {
   birthday: string
 }
 
-export default function StudentCompoent({name, email, birthday, id}: StudentProps) {
+export default function StudentDetail({name, email, birthday, id}: StudentProps) {
   const [newBirthday, setBirthday] = useState(birthday)
   const [newName, setName] = useState(name)
   const [newEmail, setEmail] = useState(email)
