@@ -25,7 +25,7 @@ export default function Students({students}: StudentsProps) {
 
   return (
     <div>
-      <h1>Students</h1>
+      <h1 className="text-xl font-bold py-6">Students</h1>
       <ul>
         {sts?.map((student) => {
           return (

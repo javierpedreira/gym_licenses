@@ -6,6 +6,7 @@ export interface LicenseQueryResponse {
   identifier: number
   owner: string
   expedition: string
+  expiration: string
 }
 
 interface License {
@@ -17,7 +18,11 @@ interface License {
 
 class LicenseDBConnector extends DBOps<LicenseQueryResponse, License> {
   async fetchByOwner(owner: string): Promise<LicenseQueryResponse[]> {
-    const {data} = await this.client.from(this.TABLE_NAME).select('*').eq('owner', owner)
+    const {data} = await this.client
+      .from(this.TABLE_NAME)
+      .select('*')
+      .eq('owner', owner)
+      .order('expiration', {ascending: false})
 
     return !!data ? data : []
   }

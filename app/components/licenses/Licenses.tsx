@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from 'react'
 import {LicenseQueryResponse, LicensesService} from '../../dbOps/LicensesService'
-import LicenseComponent from './License'
+import LicenseRow from './LicenseRow'
 
 interface LicensesProps {
   licenses: LicenseQueryResponse[]
@@ -24,22 +24,28 @@ export default function Licenses({licenses, owner}: LicensesProps) {
     setLicenses(newLicenses)
   }
 
+  const isLicenseActive = (expiration: string): boolean => {
+    const now = new Date()
+    const exp = new Date(expiration)
+
+    return exp >= now
+  }
+
   return (
     <div>
-      <h1>Licenses</h1>
-      <div>
+      <h1 className="text-xl font-bold py-6">Licenses</h1>
+      <ul>
         {lcs?.map((lic) => {
           return (
-            <LicenseComponent
+            <LicenseRow
               updateLicenses={updateLicenses}
               key={lic.id}
-              id={lic.id}
-              identifier={lic.identifier}
-              expedition={lic.expedition}
+              {...lic}
+              isActive={isLicenseActive(lic.expiration)}
             />
           )
         })}
-      </div>
+      </ul>
     </div>
   )
 }

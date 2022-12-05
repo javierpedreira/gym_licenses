@@ -11,15 +11,15 @@ export default function Home() {
   const supabase = useSupabaseClient()
 
   return (
-    <div className="container" style={{padding: '50px 0 100px 0'}}>
+    <div>
       {!session ? (
         <Auth supabaseClient={supabase} appearance={{theme: ThemeSupa}} theme="dark" />
       ) : (
-        <>
-          <Account session={session} />
+        <div>
+          {/* <Account session={session} /> */}
           <StudentSummary session={session} />
           <CreateStudent />
-        </>
+        </div>
       )}
     </div>
   )
