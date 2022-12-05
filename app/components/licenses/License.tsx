@@ -1,5 +1,4 @@
-import AuthLayer from '../components/AuthLayer'
-import {LicensesService} from '../dbOps/LicensesService'
+import {LicensesService} from '../../dbOps/LicensesService'
 
 export interface LicenseProps {
   id: string
@@ -21,7 +20,6 @@ export default function LicenseComponent({id, owner, expedition, identifier, upd
   }
   return (
     <>
-      <div>Owner: {owner}</div>
       <div>Expedition date: {expedition}</div>
       <div>ID: {identifier}</div>
       <button onClick={callDelete}>Delete</button>

@@ -5,7 +5,7 @@ import {StudentsService} from '../../dbOps/StudentsService'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
-export default function CreateLicense() {
+export default function CreateStudent() {
   const [birthday, setBirthday] = useState(TODAY)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')

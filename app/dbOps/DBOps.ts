@@ -1,7 +1,7 @@
 import {PostgrestError, PostgrestResponse, PostgrestSingleResponse, SupabaseClient} from '@supabase/supabase-js'
 
 export class DBOps<T, Y> {
-  private client: SupabaseClient
+  protected client: SupabaseClient
   protected TABLE_NAME: string
 
   constructor(dbConnector: SupabaseClient, tableName: string) {
@@ -30,8 +30,6 @@ export class DBOps<T, Y> {
   }
 
   async edit(id: any, payload: Y): Promise<PostgrestError | null> {
-    console.log('AAAAAAAAAAAA', payload)
-
     const {error} = await this.client
       .from(this.TABLE_NAME)
       .update({...payload, updated_at: new Date().toISOString()})
