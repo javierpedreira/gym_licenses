@@ -1,7 +1,8 @@
 'use client'
 
-import {useEffect, useState} from 'react'
+import {MouseEventHandler, useState} from 'react'
 import {StudentsService} from '../../dbOps/StudentsService'
+import {useRouter} from 'next/navigation'
 
 interface StudentProps {
   id: string
@@ -10,24 +11,32 @@ interface StudentProps {
   birthday: string
 }
 
-export default function StudentDetail({name, email, birthday, id}: StudentProps) {
+export default function StudentForm({name, email, birthday, id}: StudentProps) {
   const [newBirthday, setBirthday] = useState(birthday)
   const [newName, setName] = useState(name)
   const [newEmail, setEmail] = useState(email)
+  const router = useRouter()
 
-  const callDelete = () => {
-    StudentsService.delete(id)
-      .then(() => {})
-      .catch((error) => {
-        console.log(`Something went wrong, ${error}`)
-      })
+  const callDelete = (e) => {
+    try {
+      StudentsService.delete(id)
+    } catch (error) {
+      alert('Failed to delete student')
+
+      console.log(error)
+    } finally {
+      e.preventDefault()
+      router.push('/')
+    }
   }
 
   const callUpdate = () => {
     try {
       StudentsService.edit(id, {name: newName, email: newEmail, birthday: newBirthday})
-    } catch {
-      console.log('Something went wrong')
+    } catch (error) {
+      alert('Failed to update student')
+
+      console.log(error)
     }
   }
 

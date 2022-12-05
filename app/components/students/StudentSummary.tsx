@@ -3,7 +3,7 @@
 import {Session} from '@supabase/supabase-js'
 import {useEffect, useState} from 'react'
 import {StudentQueryResponse, StudentsService} from '../../dbOps/StudentsService'
-import Students_2 from './Students'
+import Students from './Students'
 
 export default function StudentSummary({session}: {session: Session}) {
   const [students, setStudents] = useState<StudentQueryResponse[]>([])
@@ -23,5 +23,5 @@ export default function StudentSummary({session}: {session: Session}) {
     }
   }
 
-  return <Students_2 students={students} />
+  return <Students students={students} />
 }

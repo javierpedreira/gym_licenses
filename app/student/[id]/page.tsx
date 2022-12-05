@@ -1,6 +1,4 @@
-import CreateLicense from '../../components/licenses/CreateLicense'
-import Licenses from '../../components/licenses/Licenses'
-import StudentDetail from '../../components/students/StudentDetail'
+import StudentPage from '../../components/students/StudentPage'
 import {LicensesService} from '../../dbOps/LicensesService'
 import {StudentsService} from '../../dbOps/StudentsService'
 
@@ -17,11 +15,5 @@ export default async function Page({params}: StudentDetailProps) {
     return <h1> Student not found</h1>
   }
 
-  return (
-    <>
-      <StudentDetail id={params.id} name={data.name} email={data.email} birthday={data.birthday} />
-      <Licenses licenses={licenses} owner={params.id} />
-      <CreateLicense owner={params.id} />
-    </>
-  )
+  return <StudentPage id={params.id} name={data.name} email={data.email} birthday={data.birthday} licenses={licenses} />
 }
