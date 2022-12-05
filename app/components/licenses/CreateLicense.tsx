@@ -11,10 +11,11 @@ interface CreateLicenseProps {
 
 export default function CreateLicense({owner}: CreateLicenseProps) {
   const [expedition, setExpeditionDate] = useState(TODAY)
+  const [expiration, setExpirationDate] = useState(TODAY)
   const [identifier, setIdentifier] = useState(0)
 
   const create = async () => {
-    LicensesService.create({identifier, expedition, owner: owner})
+    LicensesService.create({identifier, expedition, owner: owner, expiration})
 
     setExpeditionDate(TODAY)
     setIdentifier(0)
@@ -34,6 +35,12 @@ export default function CreateLicense({owner}: CreateLicenseProps) {
         placeholder="Expedition Date"
         value={expedition}
         onChange={(e) => setExpeditionDate(e.target.value)}
+      />
+      <input
+        type="date"
+        placeholder="Expedition Date"
+        value={expiration}
+        onChange={(e) => setExpirationDate(e.target.value)}
       />
       <button type="submit" disabled={!identifier}>
         Add a new license

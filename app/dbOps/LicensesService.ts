@@ -11,6 +11,7 @@ export interface LicenseQueryResponse {
 interface License {
   identifier: number
   expedition: string
+  expiration: string
   owner: string
 }
 

@@ -2,13 +2,12 @@ import {LicensesService} from '../../dbOps/LicensesService'
 
 export interface LicenseProps {
   id: string
-  owner: string
   expedition: string
   identifier: number
   updateLicenses: () => void
 }
 
-export default function LicenseComponent({id, owner, expedition, identifier, updateLicenses}: LicenseProps) {
+export default function LicenseComponent({id, expedition, identifier, updateLicenses}: LicenseProps) {
   const callDelete = () => {
     LicensesService.delete(id)
       .then(() => {

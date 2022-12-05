@@ -34,7 +34,6 @@ export default function Licenses({licenses, owner}: LicensesProps) {
               updateLicenses={updateLicenses}
               key={lic.id}
               id={lic.id}
-              owner={lic.owner}
               identifier={lic.identifier}
               expedition={lic.expedition}
             />
