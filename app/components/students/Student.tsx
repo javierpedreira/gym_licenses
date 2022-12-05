@@ -1,43 +1,38 @@
 'use client'
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {StudentsService} from '../../dbOps/StudentsService'
 
 interface StudentProps {
-  id: number
+  id: string
   name: string
   email: string
   birthday: string
-  updateStudents: () => void
 }
 
-export default function StudentCompoent({name, email, birthday, id, updateStudents}: StudentProps) {
+export default function StudentCompoent({name, email, birthday, id}: StudentProps) {
   const [newBirthday, setBirthday] = useState(birthday)
   const [newName, setName] = useState(name)
   const [newEmail, setEmail] = useState(email)
 
   const callDelete = () => {
     StudentsService.delete(id)
-      .then(() => {
-        updateStudents()
-      })
+      .then(() => {})
       .catch((error) => {
         console.log(`Something went wrong, ${error}`)
       })
   }
 
   const callUpdate = () => {
-    StudentsService.edit(id, {name: newName, email: newEmail, birthday: newBirthday})
-      .then(() => {
-        updateStudents()
-      })
-      .catch((error) => {
-        console.log(`Something went wrong, ${error}`)
-      })
+    try {
+      StudentsService.edit(id, {name: newName, email: newEmail, birthday: newBirthday})
+    } catch {
+      console.log('Something went wrong')
+    }
   }
 
   return (
-    <form onSubmit={callUpdate}>
+    <form>
       <label htmlFor="html">Name:</label>
       <input type="text" placeholder="Name" value={newName} onChange={(e) => setName(e.target.value)} />
       <label htmlFor="html">Email:</label>

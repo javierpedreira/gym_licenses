@@ -30,6 +30,8 @@ export class DBOps<T, Y> {
   }
 
   async edit(id: any, payload: Y): Promise<PostgrestError | null> {
+    console.log('AAAAAAAAAAAA', payload)
+
     const {error} = await this.client
       .from(this.TABLE_NAME)
       .update({...payload, updated_at: new Date().toISOString()})
