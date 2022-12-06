@@ -38,19 +38,24 @@ export default function Students({students}: StudentsProps) {
         </button>
       </div>
       {showCreateStudents && <CreateStudent />}
-      <ul>
-        {sts?.map((student) => {
-          return (
-            <StudentRow
-              key={student.id}
-              id={student.id}
-              name={student.name}
-              email={student.email}
-              birthday={student.birthday}
-            />
-          )
-        })}
-      </ul>
+      {!sts?.length ? (
+        //TODO Hacer que el Crear sea el mismo boton para crear
+        <h1 className="text-center">No hay Alumnos. Clica en Crear para empezar</h1>
+      ) : (
+        <ul>
+          {sts?.map((student) => {
+            return (
+              <StudentRow
+                key={student.id}
+                id={student.id}
+                name={student.name}
+                email={student.email}
+                birthday={student.birthday}
+              />
+            )
+          })}
+        </ul>
+      )}
     </div>
   )
 }
