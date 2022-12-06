@@ -5,14 +5,15 @@ import {useState} from 'react'
 import Link from 'next/link'
 
 import './globals.css'
+import {useRouter} from 'next/navigation'
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
-
-  const session = useSession()
+  const router = useRouter()
 
   const logout = () => {
     supabase.auth.signOut()
+    router.push('/')
   }
 
   return (
