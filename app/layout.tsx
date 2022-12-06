@@ -1,6 +1,6 @@
 'use client'
 import {createBrowserSupabaseClient} from '@supabase/auth-helpers-nextjs'
-import {SessionContextProvider, Session, useSession} from '@supabase/auth-helpers-react'
+import {SessionContextProvider, useSession} from '@supabase/auth-helpers-react'
 import {useState} from 'react'
 import Link from 'next/link'
 
@@ -19,19 +19,21 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html>
       <head />
-      <body className="bg-white">
-        <header className="bg-black py-7 px-8 text-white font-bold flex">
-          <Link className="flex-1" href={`/`}>
-            TKD
-          </Link>
-          <button className="button block" onClick={logout}>
-            Sign Out
-          </button>
-        </header>
-        <main className="container mx-auto">
-          <SessionContextProvider supabaseClient={supabase}>{children}</SessionContextProvider>
-        </main>
-      </body>
+      <SessionContextProvider supabaseClient={supabase}>
+        <body className="bg-white">
+          <header className="bg-black py-7 px-8 text-white font-bold flex">
+            <Link className="flex-1" href={`/`}>
+              TKD
+            </Link>
+            {!!supabase.auth.getSession() && (
+              <button className="button block" onClick={logout}>
+                Sign Out
+              </button>
+            )}
+          </header>
+          <main className="container mx-auto">{children}</main>
+        </body>
+      </SessionContextProvider>
     </html>
   )
 }

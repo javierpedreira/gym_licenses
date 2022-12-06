@@ -1,8 +1,8 @@
 'use client'
 
-import {Auth, ThemeSupa} from '@supabase/auth-ui-react'
 import {useSession, useSupabaseClient} from '@supabase/auth-helpers-react'
 import StudentSummary from './components/students/StudentSummary'
+import MyAuth from './components/ui/MyAuth'
 
 export default function Home() {
   const session = useSession()
@@ -11,7 +11,9 @@ export default function Home() {
   return (
     <div>
       {!session ? (
-        <Auth supabaseClient={supabase} appearance={{theme: ThemeSupa}} theme="dark" />
+        <div className="bg-slate-200 w-1/6 rounded-lg mx-auto mt-20 p-5">
+          <MyAuth supabaseClient={supabase} />
+        </div>
       ) : (
         <div>
           {/* <Account session={session} /> */}
