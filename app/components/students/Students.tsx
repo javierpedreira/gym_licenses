@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react'
 import {StudentQueryResponse, StudentsService} from '../../dbOps/StudentsService'
+import CreateStudent from './CreateStudent'
 import StudentRow from './StudentRow'
 
 interface StudentsProps {
@@ -10,6 +11,7 @@ interface StudentsProps {
 
 export default function Students({students}: StudentsProps) {
   const [sts, setStudents] = useState<StudentQueryResponse[]>(students)
+  const [showCreateStudents, setShowCreateStudents] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -23,9 +25,19 @@ export default function Students({students}: StudentsProps) {
     setStudents(students)
   }
 
+  const clicked = () => {
+    setShowCreateStudents(!showCreateStudents)
+  }
+
   return (
     <div>
-      <h1 className="text-xl font-bold py-6">Students</h1>
+      <div className="flex">
+        <h1 className="text-xl font-bold py-6">Alumnos</h1>
+        <button className="ml-4" onClick={clicked}>
+          Crear
+        </button>
+      </div>
+      {showCreateStudents && <CreateStudent />}
       <ul>
         {sts?.map((student) => {
           return (

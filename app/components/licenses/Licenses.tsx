@@ -40,7 +40,10 @@ export default function Licenses({licenses, owner}: LicensesProps) {
             <LicenseRow
               updateLicenses={updateLicenses}
               key={lic.id}
-              {...lic}
+              id={lic.id}
+              expedition={lic.expedition}
+              expiration={lic.expiration}
+              identifier={lic.identifier}
               isActive={isLicenseActive(lic.expiration)}
             />
           )
