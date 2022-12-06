@@ -12,9 +12,9 @@ interface StudentPageProps {
 }
 export default function StudentPage({id, name, email, birthday, licenses}: StudentPageProps) {
   return (
-    <>
+    <div className="container mx-auto">
       <StudentForm id={id} name={name} email={email} birthday={birthday} />
       <Licenses licenses={licenses} owner={id} />
-    </>
+    </div>
   )
 }
