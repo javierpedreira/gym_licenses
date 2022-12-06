@@ -29,18 +29,26 @@ export default function Students({students}: StudentsProps) {
     setShowCreateStudents(!showCreateStudents)
   }
 
+  const CreateButton = (className: string) => {
+    return (
+      <button className={className} onClick={clicked}>
+        Crear
+      </button>
+    )
+  }
+
   return (
     <div>
       <div className="flex">
         <h1 className="text-xl font-bold py-6">Alumnos</h1>
-        <button className="ml-4" onClick={clicked}>
-          Crear
-        </button>
+        {CreateButton('ml-4 hover:font-bold')}
       </div>
       {showCreateStudents && <CreateStudent />}
-      {!sts?.length ? (
-        //TODO Hacer que el Crear sea el mismo boton para crear
-        <h1 className="text-center">No hay Alumnos. Clica en Crear para empezar</h1>
+      {!sts?.length && !showCreateStudents ? (
+        <h1 className="text-center">
+          No hay Alumnos. Clica en {CreateButton('p-1 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para
+          empezar
+        </h1>
       ) : (
         <ul>
           {sts?.map((student) => {

@@ -2,6 +2,7 @@
 
 import {useEffect, useState} from 'react'
 import {LicenseQueryResponse, LicensesService} from '../../dbOps/LicensesService'
+import CreateLicense from './CreateLicense'
 import LicenseRow from './LicenseRow'
 
 interface LicensesProps {
@@ -11,6 +12,7 @@ interface LicensesProps {
 
 export default function Licenses({licenses, owner}: LicensesProps) {
   const [lcs, setLicenses] = useState<LicenseQueryResponse[]>(licenses)
+  const [showCreateLicences, setShowCreateLicenses] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -31,24 +33,47 @@ export default function Licenses({licenses, owner}: LicensesProps) {
     return exp >= now
   }
 
+  const clicked = () => {
+    setShowCreateLicenses(!showCreateLicences)
+  }
+
+  const CreateButton = (className: string) => {
+    return (
+      <button className={className} onClick={clicked}>
+        Crear
+      </button>
+    )
+  }
+
   return (
     <div>
-      <h1 className="text-xl font-bold py-6">Licenses</h1>
-      <ul>
-        {lcs?.map((lic) => {
-          return (
-            <LicenseRow
-              updateLicenses={updateLicenses}
-              key={lic.id}
-              id={lic.id}
-              expedition={lic.expedition}
-              expiration={lic.expiration}
-              identifier={lic.identifier}
-              isActive={isLicenseActive(lic.expiration)}
-            />
-          )
-        })}
-      </ul>
+      <div className="flex">
+        <h1 className="text-xl font-bold py-6">Licencias</h1>
+        {CreateButton('ml-4 hover:font-bold')}
+      </div>
+      {showCreateLicences && <CreateLicense owner={owner} />}
+      {!lcs?.length && !showCreateLicences ? (
+        <h1 className="text-center">
+          Este alumno no tiene licencias. Clica en{' '}
+          {CreateButton('p-1 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para empezar
+        </h1>
+      ) : (
+        <ul>
+          {lcs?.map((lic) => {
+            return (
+              <LicenseRow
+                updateLicenses={updateLicenses}
+                key={lic.id}
+                id={lic.id}
+                expedition={lic.expedition}
+                expiration={lic.expiration}
+                identifier={lic.identifier}
+                isActive={isLicenseActive(lic.expiration)}
+              />
+            )
+          })}
+        </ul>
+      )}
     </div>
   )
 }

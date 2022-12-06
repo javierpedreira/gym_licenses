@@ -1,6 +1,5 @@
 'use client'
 import {LicenseQueryResponse} from '../../dbOps/LicensesService'
-import CreateLicense from '../licenses/CreateLicense'
 import Licenses from '../licenses/Licenses'
 import StudentForm from './StudentForm'
 
@@ -16,7 +15,6 @@ export default function StudentPage({id, name, email, birthday, licenses}: Stude
     <>
       <StudentForm id={id} name={name} email={email} birthday={birthday} />
       <Licenses licenses={licenses} owner={id} />
-      <CreateLicense owner={id} />
     </>
   )
 }

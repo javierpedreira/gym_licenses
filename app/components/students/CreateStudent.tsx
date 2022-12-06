@@ -19,7 +19,7 @@ export default function CreateStudent() {
 
   return (
     <form className="p-5 mb-6 bg-neutral-200 rounded-xl" onSubmit={create}>
-      <div className='flex shadow sm:overflow-hidden sm:rounded-md"'>
+      <div className="flex shadow sm:overflow-hidden sm:rounded-md">
         <input
           className="px-4 py-2 mr-4 flex-auto rounded-lg"
           type="text"
