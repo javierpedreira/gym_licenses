@@ -49,13 +49,13 @@ export default function Licenses({licenses, owner}: LicensesProps) {
     <div>
       <div className="flex">
         <h1 className="text-xl font-bold py-6">Licencias</h1>
-        {CreateButton('ml-4 hover:font-bold')}
+        {CreateButton('ml-4')}
       </div>
       {showCreateLicences && <CreateLicense owner={owner} />}
       {!lcs?.length && !showCreateLicences ? (
         <h1 className="text-center">
           Este alumno no tiene licencias. Clica en{' '}
-          {CreateButton('p-1 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para empezar
+          {CreateButton('p-1 px-2 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para empezar
         </h1>
       ) : (
         <ul>
