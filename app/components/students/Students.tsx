@@ -45,7 +45,6 @@ export default function Students({students}: StudentsProps) {
       </div>
       {showCreateStudents && <CreateStudent />}
       {!sts?.length && !showCreateStudents ? (
-        //TODO Hacer que el Crear sea el mismo boton para crear
         <h1 className="text-center">
           No hay Alumnos. Clica en {CreateButton('p-1 px-2 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para
           empezar
@@ -60,6 +59,8 @@ export default function Students({students}: StudentsProps) {
                 name={student.name}
                 email={student.email}
                 birthday={student.birthday}
+                licenseSummaryId={student.identifier}
+                licenseSummaryExpiration={student.expiration}
               />
             )
           })}
