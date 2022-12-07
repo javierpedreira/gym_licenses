@@ -37,6 +37,17 @@ export default function Students({students}: StudentsProps) {
     )
   }
 
+  const daysToExpore = (expiration: string | undefined): number | undefined => {
+    if (!expiration) return undefined
+    const now = new Date()
+    if (now.toISOString().slice(0, 10) == expiration) return 0
+    const exp = new Date(expiration).getTime()
+
+    const daysToExpire = (exp - now.getTime()) / (1000 * 3600 * 24)
+
+    return Math.floor(daysToExpire)
+  }
+
   return (
     <div>
       <div className="flex">
@@ -61,6 +72,7 @@ export default function Students({students}: StudentsProps) {
                 birthday={student.birthday}
                 licenseSummaryId={student.identifier}
                 licenseSummaryExpiration={student.expiration}
+                daysToExpire={daysToExpore(student.expiration)}
               />
             )
           })}
