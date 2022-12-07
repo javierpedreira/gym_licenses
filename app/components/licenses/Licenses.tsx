@@ -38,24 +38,21 @@ export default function Licenses({licenses, owner}: LicensesProps) {
   }
 
   const CreateButton = (className: string) => {
-    return (
-      <button className={className} onClick={clicked}>
-        Crear
-      </button>
-    )
+    return <button className={className} onClick={clicked} />
   }
 
   return (
     <div>
       <div className="flex">
         <h1 className="text-xl font-bold py-6">Licencias</h1>
-        {CreateButton('ml-4')}
+        {CreateButton('fa-solid fa-plus ml-4')}
       </div>
       {showCreateLicences && <CreateLicense owner={owner} />}
       {!lcs?.length && !showCreateLicences ? (
         <h1 className="text-center">
           Este alumno no tiene licencias. Clica en{' '}
-          {CreateButton('p-1 px-2 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para empezar
+          {CreateButton('fa-solid fa-plus p-1 px-2 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para agregar
+          una nueva licencia
         </h1>
       ) : (
         <ul>

@@ -40,7 +40,9 @@ export default function StudentRow({
         <span className="font-bold flex-auto">{name}</span>
         <span className="flex-auto">{email}</span>
         {isExpired() && <span className="flex-1 text-right">Licencia caducada</span>}
-        {isAboutToExpire() && <span className="flex-1 text-right">Esta licencia caducará pronto</span>}
+        {isAboutToExpire() && (
+          <i className="fa-solid fa-triangle-exclamation" title={`Esta licencia caducará en ${daysToExpire}`}></i>
+        )}
         {!!licenseSummaryExpiration && licenseSummaryId && !isExpired() && (
           <span className="flex-1 text-right">
             Licencia {licenseSummaryId} - {licenseSummaryExpiration}

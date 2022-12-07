@@ -18,7 +18,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 
   return (
     <html>
-      <head />
+      <head>
+        <script src="https://kit.fontawesome.com/425ccf5841.js" crossOrigin="anonymous"></script>
+      </head>
       <SessionContextProvider supabaseClient={supabase}>
         <body className="bg-white">
           <header className="bg-black py-7 px-8 text-white font-bold flex">
@@ -26,9 +28,10 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
               TKD
             </Link>
             {!!supabase.auth.getSession() && (
-              <button className="button block" onClick={logout}>
-                Sign Out
-              </button>
+              <button className="fa-solid fa-right-from-bracket" onClick={logout}></button>
+              // <button className="button block" onClick={logout}>
+              //   Sign Out
+              // </button>
             )}
           </header>
           <main className="container mx-auto">{children}</main>

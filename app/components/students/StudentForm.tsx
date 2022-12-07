@@ -79,14 +79,14 @@ export default function StudentForm({name, email, birthday, id}: StudentProps) {
         />
       </div>
       <button
-        className="bg-slate-800 hover:bg-slate-600 text-slate-100 px-4 py-2 mr-4 font-bold flex-auto rounded-lg"
+        className="fa-sharp fa-solid fa-pen-to-square text-slate-800 hover:text-slate-600 px-4 py-2 mr-4 font-bold flex-auto rounded-lg"
         type="submit"
-        onClick={callUpdate}>
-        Actualizar
-      </button>
-      <button className="px-4 py-2 mr-4 font-bold hover:text-slate-600 flex-1 rounded-lg" onClick={callDelete}>
-        Borrar
-      </button>
+        onClick={callUpdate}
+      />
+      <button
+        className="fa-sharp fa-solid fa-trash px-4 py-2 mr-4 font-bold hover:text-red-600 flex-1 rounded-lg"
+        onClick={callDelete}
+      />
     </form>
   )
 }

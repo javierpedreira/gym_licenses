@@ -27,9 +27,10 @@ export default function LicenseRow({id, expedition, expiration, identifier, isAc
       <div className="flex-auto align-middle">Expedition date: {expedition}</div>
       <div className="flex-auto align-middle">Expiration date: {expiration}</div>
       <div className="flex-auto">
-        <button className="font-bold rounded-lg  hover:text-slate-400 active:bg-slate-500" onClick={callDelete}>
-          Delete
-        </button>
+        <button
+          className="fa-sharp fa-solid fa-trash font-bold rounded-lg  hover:text-red-600 active:bg-slate-500"
+          onClick={callDelete}
+        />
       </div>
     </li>
   )

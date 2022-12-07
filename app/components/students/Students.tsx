@@ -30,11 +30,7 @@ export default function Students({students}: StudentsProps) {
   }
 
   const CreateButton = (className: string) => {
-    return (
-      <button className={className} onClick={clicked}>
-        Crear
-      </button>
-    )
+    return <button className={className} onClick={clicked} />
   }
 
   const daysToExpore = (expiration: string | undefined): number | undefined => {
@@ -52,13 +48,14 @@ export default function Students({students}: StudentsProps) {
     <div>
       <div className="flex">
         <h1 className="text-xl font-bold py-6">Alumnos</h1>
-        {CreateButton('ml-4')}
+        {CreateButton('fa-solid fa-plus ml-4')}
       </div>
       {showCreateStudents && <CreateStudent />}
       {!sts?.length && !showCreateStudents ? (
         <h1 className="text-center">
-          No hay Alumnos. Clica en {CreateButton('p-1 px-2 bg-slate-300 font-bold rounded-lg hover:bg-slate-200')} para
-          empezar
+          No hay Alumnos. Clica en{' '}
+          {CreateButton('fa-solid fa-plus p-1 px-2 border-solid font-bold rounded-lg hover:bg-slate-200')} para agregar
+          alumnos
         </h1>
       ) : (
         <ul>
