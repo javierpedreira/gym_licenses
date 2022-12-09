@@ -14,7 +14,7 @@ export default function StudentSummary({session}: {session: Session}) {
 
   async function getProfile() {
     try {
-      const data = await StudentsService.fetchAll()
+      const data = await StudentsService.fetchByUser(session.user.id)
 
       setStudents(data)
     } catch (error) {
@@ -23,5 +23,5 @@ export default function StudentSummary({session}: {session: Session}) {
     }
   }
 
-  return <Students students={students} />
+  return <Students students={students} user_id={session.user.id} />
 }

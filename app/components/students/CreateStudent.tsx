@@ -5,13 +5,13 @@ import {StudentsService} from '../../dbOps/StudentsService'
 
 const TODAY = new Date().toISOString().slice(0, 10)
 
-export default function CreateStudent() {
+export default function CreateStudent({user_id}: {user_id: string}) {
   const [birthday, setBirthday] = useState(TODAY)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
   const create = async () => {
-    StudentsService.create({name, email, birthday})
+    StudentsService.create({name, email, birthday, user_id})
     setBirthday(TODAY)
     setName('')
     setEmail('')

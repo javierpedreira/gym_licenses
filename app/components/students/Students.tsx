@@ -7,9 +7,10 @@ import StudentRow from './StudentRow'
 
 interface StudentsProps {
   students: StudentQueryResponse[]
+  user_id: string
 }
 
-export default function Students({students}: StudentsProps) {
+export default function Students({students, user_id}: StudentsProps) {
   const [sts, setStudents] = useState<StudentQueryResponse[]>(students)
   const [showCreateStudents, setShowCreateStudents] = useState(false)
 
@@ -50,7 +51,7 @@ export default function Students({students}: StudentsProps) {
         <h1 className="text-xl font-bold py-6">Alumnos</h1>
         {CreateButton('fa-solid fa-plus ml-4')}
       </div>
-      {showCreateStudents && <CreateStudent />}
+      {showCreateStudents && <CreateStudent user_id={user_id} />}
       {!sts?.length && !showCreateStudents ? (
         <h1 className="text-center">
           No hay Alumnos. Clica en{' '}
