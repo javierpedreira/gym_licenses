@@ -15,11 +15,11 @@ export default function MyAuth({supabaseClient}: MyAuthProps) {
     })
   }
   return (
-    <div>
+    <div className="rounded-lg">
       {!emailSent ? (
         <div className="text-center">
           <input
-            className="px-4 py-2 mr-4 flex-auto rounded-lg"
+            className="border-solid border-2 border-slate-500 px-4 py-2 mr-4 rounded-lg"
             type="email"
             placeholder="Tu email"
             onChange={(e) => setEmail(e.target.value)}></input>

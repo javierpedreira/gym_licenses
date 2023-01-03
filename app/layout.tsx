@@ -5,16 +5,9 @@ import {useState} from 'react'
 import Link from 'next/link'
 
 import './globals.css'
-import {useRouter} from 'next/navigation'
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   const [supabase] = useState(() => createBrowserSupabaseClient())
-  const router = useRouter()
-
-  const logout = () => {
-    supabase.auth.signOut()
-    router.push('/')
-  }
 
   return (
     <html>
@@ -27,12 +20,6 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             <Link className="flex-1" href={`/`}>
               TKD
             </Link>
-            {!!supabase.auth.getSession() && (
-              <button className="fa-solid fa-right-from-bracket" onClick={logout}></button>
-              // <button className="button block" onClick={logout}>
-              //   Sign Out
-              // </button>
-            )}
           </header>
           <main className="container mx-auto">{children}</main>
         </body>
